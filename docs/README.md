@@ -1,6 +1,7 @@
 # Mục lục tài liệu
 
 ## Nhật ký công việc
+- [Đưa guideline v0.1 lên GitHub](2026-11-16-173035-push-guideline-v01.md)
 - [Khởi tạo quy trình và cài dependencies](2026-11-16-171000-khoi-tao-va-cai-dependencies.md)
 
 ## Hướng dẫn hiện có
