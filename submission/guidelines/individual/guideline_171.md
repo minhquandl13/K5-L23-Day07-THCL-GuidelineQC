@@ -1,4 +1,4 @@
-# Guideline gán nhãn — v1.0-cá nhân — <mã thành viên>
+# Guideline gán nhãn — v1.0-cá nhân — 171
 
 - Phiên bản: v1.0-cá nhân (bản độc lập, Pha 1)
 - Ngày: 16/11/2026
