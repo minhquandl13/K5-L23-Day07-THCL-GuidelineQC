@@ -2,7 +2,7 @@
 
 - Phiên bản: v1.0-cá nhân (bản độc lập, Pha 1)
 - Ngày: 16/11/2026
-- Người viết / duyệt: <mã 3 chữ số>
+- Người viết / duyệt: Đặng Minh Quân / 171
 
 > Đổi tên file thành `guideline_<mã>.md` (ví dụ `guideline_101.md`). Bản này viết xong trước họp nhóm,
 > không sửa lại sau Pha 2 — mọi thay đổi sau đó ghi vào guideline nhóm v1.0/v1.1.
