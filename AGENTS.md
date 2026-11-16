@@ -1,5 +1,10 @@
 # Quy trình làm việc của dự án
 
+## Bảo vệ script
+- AI không được phép sửa các script trong dự án, bao gồm toàn bộ tệp trong `scripts/` và các script ở vị trí khác.
+- Không chỉnh sửa nội dung, ghi đè, xóa, đổi tên hoặc di chuyển script; không dùng công cụ hay lệnh tự động để thay đổi chúng gián tiếp.
+- AI được đọc script để phân tích. Nếu nhiệm vụ cần sửa script, dừng phần việc đó và báo rõ cho người dùng; không tự thực hiện thay đổi.
+
 ## Git và commit
 - Dự án phải được quản lý bằng Git. Trước mỗi nhiệm vụ, kiểm tra `git status` để nhận diện thay đổi sẵn có.
 - Sau mỗi nhiệm vụ hoặc nhóm thay đổi hoàn chỉnh, tạo commit gồm mã nguồn, test và tài liệu liên quan; nhiệm vụ chỉ khảo sát, phân tích hoặc kiểm tra vẫn phải ghi kết quả trong `docs/` và commit.
@@ -19,6 +24,9 @@
 - Khi bị chặn, chỉ commit tiến độ chưa hoàn tất nếu người dùng cho phép; ghi rõ trạng thái trong nhật ký và thông điệp commit.
 
 ## Tài liệu trong docs/
+- Không được push lên GitHub các tệp `*.md` trong `docs/` (kể cả thư mục con) do AI tạo, bao gồm nhật ký và mục lục nếu do AI tạo. Quy tắc này áp dụng cả với các tệp đã được Git theo dõi.
+- Các tệp này vẫn được lưu và commit cục bộ theo quy trình tài liệu. Trước mọi lần push lên GitHub, phải kiểm tra toàn bộ các commit sẽ được gửi, không chỉ trạng thái tệp hiện tại. Nếu lịch sử sẽ gửi có chứa các tệp trên hoặc chưa xác định được nguồn tạo, dừng push và báo người dùng.
+- Không coi `.gitignore` hoặc việc xóa tệp ở commit mới là đủ để loại tệp khỏi lịch sử sẽ push; không tự sửa lịch sử Git hay xóa tài liệu để né quy tắc.
 - Luôn duy trì `docs/` tại gốc dự án. Mọi nhiệm vụ, kể cả thiết lập, khảo sát, phân tích, test và cấu hình, phải có nhật ký Markdown.
 - Dùng tên `docs/YYYY-MM-DD-HHMMSS-mo-ta-ngan.md`; chỉ cập nhật nhật ký của chính nhiệm vụ đang tiếp tục.
 - Ghi mục tiêu, việc đã làm, quyết định, tệp thay đổi, lệnh xác minh/test và kết quả thực tế, hạn chế và bước tiếp theo.
