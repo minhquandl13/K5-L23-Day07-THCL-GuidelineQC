@@ -45,10 +45,13 @@ Ghi công ảnh giữ tại `data/ATTRIBUTION.csv`.
 
 **R-02 — phân biệt lớp bằng cấu trúc, theo đúng thứ tự này** (không dựa vào số ghế, nhãn hiệu, kích thước):
 
-1. Thấy **thùng/sàn chở hàng tách khỏi cabin**, hoặc bán tải có thùng hở → `truck`.
-2. Thấy **thân hộp kín, nóc liền một khối**, không có thùng riêng (kể cả cửa hông và kính sau kín) → `van`.
-3. **Còn lại** thân ô tô con có cabin và khoang khách liền → `car`.
-4. Không đủ dấu hiệu để chọn → tick `can_review` và ghi câu hỏi; không đoán.
+1. Có **thùng/sàn chở hàng tách khỏi cabin** — bán tải thùng hở, tải thùng kín/bạt, thùng dịch vụ gắn trên sàn — → `truck`.
+2. Có **thân hộp kín liền một khối từ cabin ra sau**, không thùng riêng → `van`.
+3. **Còn lại** thân ô tô con, cabin và khoang khách liền → `car`.
+4. **Phép thử "đường nóc" (dùng khi phân vân `van` ↔ `truck`):**
+   nóc cabin và nóc khoang sau **rời nhau, có bậc/seam, hoặc khoang sau cao hơn cabin** → `truck` (`img_037`);
+   nóc **liền một đường** từ kính trước tới đuôi, chỉ có cửa hông và kính bên → `van` (`img_009`, `img_016`).
+5. Không đủ dấu hiệu → `can_review` + câu hỏi; không đoán. **Trong 40 ảnh này không có ca nào rơi vào mục 5.**
 
 ### 2.2. Thuộc tính — mỗi box đủ 3 thuộc tính (trừ `ignore_region`)
 
@@ -118,9 +121,9 @@ Bị che 100% thì **không được suy ra** để gán. Không dùng mức `3`
 | `img_006` | 3 xe máy từ phía sau (1–2 người/xe); 2 xe đạp phải; ô tô trắng cắt trái | R-03, R-09, R-10 | 3 `motorcycle` + 4 `person`; xe đạp không gán; ô tô `truncated=yes` |
 | `img_007` | Bán tải có giá nóc + 2 xe thùng trong kho, xe phải cắt mép | R-02, R-10 | `truck` cho cả 3; xe phải `truncated=yes` |
 | `img_008` | Ban đêm, hàng chục xe máy dựng sát nhau; 2 người giao hàng | R-03, R-08 | Gán các xe/người tách được ở lớp gần; nền dày → `ignore_region` |
-| `img_009` | Minibus be `29B-0944` | R-02, R-09 | `van` + `can_review` (xem §4.3) |
+| `img_009` | Minibus du lịch be `29B-0944` (Ford Transit 16 chỗ, "DULICH HOANMY") | R-02, R-09 | **`van`**, `occluded_level=0`, `truncated=no` — nóc liền một đường từ cabin ra đuôi, không thùng riêng, 1 cửa khách; **không** `can_review` |
 | `img_010` | Xe máy 2 người đi xa; xe đạp thồ rau; người ngồi trên xe đỗ bên phải | R-03, R-09 | 2 `motorcycle` + 3 `person`; xe đạp không gán |
-| `img_011` | Tượng quái vật khổng lồ; xe điêu khắc; đám đông xa | R-05, R-07 | Không gán tượng/xe điêu khắc; 3 người thật gần → `person`; đám xa → `ignore_region` |
+| `img_011` | Tượng quái vật khổng lồ (sơn tróc) trên bệ trưng bày; xe điêu khắc sắt vụn; đám đông trên sân | R-05, R-07, R-09 | Tượng + xe điêu khắc: **không box**. Người thật tách được (3 người gần trái + từng người trên sân có `h ≥ 20 px`) → `person`. Van trắng giữa sân đạt 20 px → `van` che `1` (bị tay tượng chắn). Đám xa < 20 px → 1 `ignore_region` `small<20px` |
 | `img_012` | Bán tải chở đầy hàng, cắt phải + đáy; CX-5 trái; tải phía sau | R-02, R-10, R-12 | 1 `truck` (`truncated=yes`) không phình theo hàng; 1 `car`; tải xa nếu đạt 20 px |
 | `img_013` | Hai người đi bộ ban đêm, mặt đường ướt phản chiếu | R-01, R-06 | `person` cho cả hai; phản chiếu dưới chân không gán |
 | `img_014` | Hai người đi bộ nét; xe/người nhòe phía sau | R-13 | 2 `person`; vệt nhòe → `ignore_region`, không gán box |
@@ -128,12 +131,12 @@ Bị che 100% thì **không được suy ra** để gán. Không dùng mức `3`
 | `img_016` | Scooter giữa; tuk-tuk hai bên; van; người áo đỏ cắt góc | R-02, R-03, R-09 | 1 `person` + 1 `motorcycle`; `van`; tuk-tuk không gán; người góc `truncated=yes` |
 | `img_017` | Tượng đồng người cưỡi ngựa + chim thật | R-05, R-14 | Không gán gì; ảnh vẫn có trong COCO |
 | `img_018` | Biển quảng cáo in chân dung; bãi xe sau lưới | R-05, R-06 | Không gán chân dung; `car` cho xe, che `1` do lưới |
-| `img_019` | Xe vàng trang trí có biển số; mascot chuột; đám đông sau rào | R-03, R-05, R-08 | `car` cho xe (`can_review`), mascot không gán, người lái `person` che `2`, đám đông → `ignore_region` |
+| `img_019` | Xe vàng trang trí diễu hành, biển `YR04 NUM`, tài xế ngồi trong; mascot chuột bông; khán giả sau rào | R-03, R-05, R-08, R-10 | **`car`** (thân xe thật, có biển số, đang chạy, có người lái); tài xế `person` che `2`; mascot bông: **không gán**; khán giả hàng đầu (`h ≥ 20 px`, tách được) → `person` từng người; đám phía sau dày → 1 `ignore_region`; đầu người góc dưới–phải (nhòe, cắt khung) → `person` `truncated=yes` |
 | `img_020` | Toàn ảnh là gương chiếu hậu + thân ego | R-06, R-14 | Không box nào; ảnh vẫn có trong COCO |
 | `img_021` | Dòng xe máy dày đặc | R-03, R-08 | Gán 2–3 lớp gần nhất còn rõ biên; nền → 1 `ignore_region` |
 | `img_022` | Mô tô + sidecar, đen trắng, 2 người | R-03 | 1 `motorcycle` (gộp sidecar) + 2 `person` (che `2` cho người trong sidecar) |
 | `img_023` | Xích lô chở khách; Civic; xe máy; người bán hàng | R-04, R-09 | Xích lô không gán; `person` cho người đạp + khách; `car` cho Civic; `motorcycle` |
-| `img_024` | Bảo tàng: thân xe vàng trên nóc xe đen + dãy xe | R-04, R-09 | `car` cho xe đen và xe thật quanh; xe trên nóc `car` + `can_review` (§4.3) |
+| `img_024` | Bảo tàng Rambler Ranch: wagon đen `Pacer` + thân AMC Pacer vàng tỉ lệ 1:1 trên giá nóc + dãy xe trưng bày | R-04, R-05 | **`car`** cho wagon đen; **`car`** cho thân xe vàng trên nóc (xe thật 1:1, có bánh/lốp thật, đặt trên giá — cùng logic `img_002`); `car` cho từng xe trong dãy phải và sedan kem trái. Không `ignore_region` — đây là vật thật, không phải mô hình |
 | `img_025` | Vỉa hè: người gần/xa; xe máy có thùng bên phải | R-03, R-07 | Người/xe đạt 20 px → gán; người xa < 20 px → `ignore_region` |
 | `img_026` | 2 người trên xe đỏ ban đêm; bánh cắt đáy; tranh tường | R-03, R-05, R-10 | 2 `person` + 1 `motorcycle` `truncated=yes`; tranh tường không gán |
 | `img_027` | Bia mộ bằng đá hình bán tải | R-05, R-14 | Không box nào |
@@ -146,7 +149,7 @@ Bị che 100% thì **không được suy ra** để gán. Không dùng mức `3`
 | `img_034` | Người qua đường; ô tô đen; 2 xe đạp; rider cắt phải | R-03, R-09, R-10 | `person` + `car` + `motorcycle`; xe đạp không gán; rider `truncated=yes` |
 | `img_035` | Auto-rickshaw chở bao tải cao gấp đôi xe; xe máy; xe trắng | R-09, R-12 | Rickshaw + hàng không gán; `motorcycle` + `person`; `car` cho xe trắng |
 | `img_036` | Tải nhỏ thùng bạt xanh; dãy scooter phía sau | R-02, R-08 | 1 `truck`; dãy scooter bị che → `ignore_region` |
-| `img_037` | Bán tải gắn thùng kín (nắp cao); xe buýt xanh; công nhân | R-02, R-09, R-12 | `truck` + `can_review`; buýt không gán; `person` (che `0`) |
+| `img_037` | Chevrolet Silverado gắn thùng dịch vụ kín (nóc thùng cao hơn nóc cabin); 2 xe buýt xanh; 1 người đi bộ áo đen | R-02, R-09, R-12 | **`truck`** — thùng gắn trên sàn, có bậc/seam giữa nóc cabin và nóc thùng (phép thử "đường nóc" R-02 bước 4); `person` cho người áo đen bên trái; buýt: **không gán**; không `can_review` |
 | `img_038` | Tủ kính toàn đồ chơi (xe mô hình ~1:43, vịt cao su, gấu bông) + phản chiếu | R-05, R-14 | **Không box nào, không `ignore_region`** — không có vật thật nào trong ảnh; ảnh vẫn phải có trong COCO với `annotations` rỗng |
 | `img_039` | Xe đạp giữa đường; người đi bộ; scooter gần/xa | R-07, R-09 | Người/xe đạt ngưỡng gán; xe đạp không gán; vật xa đo trước |
 | `img_040` | Người đội mũ sát camera cắt đáy; taxi; tuk-tuk; SUV; buýt | R-03, R-09, R-10 | `person` `truncated=yes`; `car` cho taxi/SUV; tuk-tuk + buýt không gán; phản chiếu trong mũ không gán |
@@ -165,20 +168,26 @@ Bị che 100% thì **không được suy ra** để gán. Không dùng mức `3`
 | 8 | Đám đông | không phủ cả bãi; ignore có điều kiện | ≥ 2 dấu hiệu | ≥ 5 vật → ignore | ≥ 50% thân + ignore lớp sau | **R-08: gán từng vật nếu ≥ 50% thân, ≥ 2 dấu hiệu, ≥ 20 px; ignore chỉ cho cụm < 20 px hoặc không tách được** | Ngưỡng "≥ 5 vật" của 167 cho phép bỏ việc hợp pháp → mất nhãn và mất điểm "vật bỏ sót". Giữ đúng hướng 142 + 171 |
 | 9 | Khẩu trang/mũ tính là che? | không | **có** | không | không | **Không tính** | Nếu tính, mọi người đeo khẩu trang thành mức 1 → phá vỡ đồng thuận thuộc tính và sai thực tế. Mũ/khẩu trang thuộc hình dáng người |
 | 10 | Tượng / ma-nơ-canh / đồ chơi / hình in / phản chiếu / ego | bỏ qua | bỏ qua | bỏ qua | bỏ qua | **Bỏ qua, không ignore** | 4/4. Không dùng `ignore_region` để "che" phản ví dụ (142 nêu rõ) |
-| 11 | `img_011` nhân vật lớn + xe điêu khắc | REVIEW | — | `person` | bỏ qua | **Bỏ qua (tượng/trưng bày)** + người thật nhỏ vẫn gán | Kích thước gấp nhiều lần người bên dưới, đứng trên khu trưng bày cùng xe điêu khắc → vật trưng bày, không phải người hóa trang đang đi lại |
-| 12 | `img_019` xe vàng diễu hành | REVIEW, tạm `car` | — | bỏ qua | `car` | **`car`** + `can_review`; mascot không gán | Có biển số thật, chạy trong đoàn, có người lái trong khoang → thân xe thật, chỉ là trang trí bề mặt |
-| 13 | `img_024` xe vàng trên nóc | bỏ qua (mô hình) | — | — | `car` | **`car`** + `can_review` | Thân xe tỉ lệ 1:1 đặt trên giá (như `img_002`); ca cần mắt người xác nhận — xem §4.3 |
-| 14 | `img_009` minibus | bỏ qua (buýt) | — | bỏ qua | `van` nếu ≤ 16 | **`van`** + `can_review` | Thân kín liền nóc, không thùng hàng tách rời → `van` theo R-02; nếu thấy ≥ 2 cửa khách dọc thân thì đổi sang bỏ qua |
+| 11 | `img_011` nhân vật lớn + xe điêu khắc | REVIEW | — | `person` | bỏ qua | **Bỏ qua (tượng trưng bày)**, không `can_review` | Bề mặt sơn tróc, kích thước gấp nhiều lần người bên dưới, đặt trên bệ trưng bày cạnh xe điêu khắc sắt vụn → tác phẩm, không phải người hóa trang đang đi lại. Người thật trong sân vẫn gán |
+| 12 | `img_019` xe vàng diễu hành | REVIEW, tạm `car` | — | bỏ qua | `car` | **`car`**, không `can_review`; mascot không gán | Biển số `YR04 NUM` thật, xe đang chạy trên đường trong đoàn diễu hành, có tài xế ngồi trong khoang → thân xe thật, chỉ là trang trí bề mặt. Đây là ca "trông giả nhưng là thật" |
+| 13 | `img_024` xe vàng trên nóc | bỏ qua (mô hình) | — | — | `car` | **`car`**, không `can_review` | Ảnh gốc cho thấy thân AMC Pacer **tỉ lệ 1:1** có bánh và lốp thật, đặt trên giá nóc → xe thật được vận chuyển/trưng bày, cùng logic `img_002`; không phải mô hình đồ chơi như `img_038` |
+| 14 | `img_009` minibus | bỏ qua (buýt) | — | bỏ qua | `van` nếu ≤ 16 | **`van`**, không `can_review` | Ảnh gốc: Ford Transit 16 chỗ, nóc liền một đường từ cabin ra đuôi, **một** cửa khách, không thùng hàng tách rời → `van` theo R-02. Không đủ điều kiện "≥ 2 cửa khách dọc thân" để xếp vào buýt |
 | 15 | Hàng trong lòng thùng (`img_012`) | không kéo box | không kéo | box bao cả hàng trong thùng | không kéo | **Không phình lên trên; box tới mép thùng** | Hàng nằm trong biên dạng xe không đổi kích thước xe; hàng vượt thân mới `can_review` |
 | 16 | Ảnh không có vật | giữ ảnh trong COCO | — | — | giữ ảnh, `annotations` rỗng | **Giữ ảnh** | Cần cho độ phủ IAA (`coverage`) trong `qc_compare.py` |
 
-### 4.3. Ca còn mở (phải đóng trước khi khóa, hoặc ghi vào `calibration_decisions.csv` ở Pha 5)
+### 4.3. Đã đóng — 40/40 ảnh có quyết định cuối, không còn ca mở
 
-| Ảnh | Câu hỏi mở | Ai chốt | Cách kiểm |
-|---|---|---|---|
-| `img_024` | Thân xe vàng trên nóc là xe thật tỉ lệ 1:1 hay mô hình? | người điều phối | zoom ảnh gốc, so tỉ lệ với xe đen bên dưới → nếu là mô hình, xóa box `car` đó |
-| `img_009` | Minibus có ≥ 2 cửa khách dọc thân (→ buýt, bỏ qua) hay 1 cửa (→ `van`)? | người điều phối | zoom phần hông xe; đếm cửa |
-| `img_037` | Nắp thùng có làm xe thành `van` không? | nhóm | đã chốt `truck`; chỉ cần xác nhận lại 1 lần |
+Ba ca từng để ngỏ đã được kiểm tra trên ảnh gốc. Không sửa lại sau khi khóa; nếu ai thấy khác thì mở ca
+qua `calibration_decisions.csv` ở Pha 5, không tự đổi nhãn.
+
+| Ảnh | Bằng chứng trên ảnh gốc | Quyết định cuối |
+|---|---|---|
+| `img_024` | Thân AMC Pacer vàng có bánh cao su và lốp thật, vành đúng tỉ lệ, đặt trên giá nóc của wagon đen; nền là showroom có dãy xe cổ thật | `car` (xe thật cỡ 1:1) — không phải mô hình |
+| `img_009` | Ford Transit 16 chỗ, biển `29B-0944`, nóc liền một khối, một cửa khách phía trước | `van` |
+| `img_037` | Nóc thùng dịch vụ **cao hơn** nóc cabin, có bậc và seam rõ; thùng gắn trên sàn bán tải | `truck` |
+
+**Hệ quả cho Pha 3–5:** trong 40 ảnh này **không box nào cần tick `can_review`**. Thuộc tính vẫn giữ trong
+taxonomy cho ảnh mới, nhưng nếu ai tick thì phải có lý do và phải xuất hiện trong `calibration_decisions.csv`.
 
 ### 4.4. Hiệu chỉnh mô tả ảnh giữa các bản (dùng khi tranh luận)
 
@@ -206,7 +215,7 @@ Không có cặp → ghi `N/A`, không ghi 100%. Luôn ghi `tử số/mẫu số
 
 ### 5.2. Quy trình ca mơ hồ
 
-1. Pha 3: box chưa chắc → tick `can_review`; vùng không vẽ được → ghi `submission/qc/image_issues.csv`
+1. Pha 3: box chưa chắc → tick `can_review` (**40 ảnh này: không dùng**); vùng không vẽ được → ghi `submission/qc/image_issues.csv`
    (`image, annotator, region, note`) **sau khi khóa nhãn, trước khi chạy `qc_compare.py`**.
 2. Pha 5: mỗi ca bất thường một dòng trong `calibration_decisions.csv`, nêu mã rule (`R-xx`) và phạm vi
    `anh`/`lo`. Rule mới hoặc đổi nghĩa → `guideline_v1.1_calibrated.md` + `guideline_change.json`.
@@ -218,8 +227,9 @@ Không có cặp → ghi `N/A`, không ghi 100%. Luôn ghi `tử số/mẫu số
 |---|---|---|
 | v0 | Bản giảng viên: 6 lớp, 3 thuộc tính, 3 quy tắc | — |
 | v0.1 (4 bản cá nhân) | Mỗi thành viên tự viết R-01…R-13/R-15, tự chọn ngưỡng thuộc tính | v0 thiếu ranh giới lớp, ngưỡng thuộc tính và quy tắc ca biên |
-| **v1.0 (bản này)** | Hợp nhất 4 bản; chốt 16 bất đồng ở §4.2; 14 rule R-01…R-14; ngưỡng che 10/30/70, `truncated` theo đường bao hở; bán tải = `truck`; tuk-tuk/buýt/xe đạp/xích lô ngoài phạm vi; không thêm lớp, `rules` giữ nguyên | `img_002`, `img_004`, `img_005`, `img_009`, `img_011`, `img_019`, `img_024`, `img_032`, `img_037` |
+| **v1.0 (bản này)** | Hợp nhất 4 bản; chốt 16 bất đồng ở §4.2; 14 rule R-01…R-14; ngưỡng che 10/30/70, `truncated` theo đường bao hở; bán tải = `truck`; tuk-tuk/buýt/xe đạp/xích lô ngoài phạm vi; không thêm lớp, `rules` giữ nguyên; §4.3 đóng bằng kiểm tra ảnh gốc (`img_009`, `img_024`, `img_037`) và bỏ toàn bộ `can_review` | `img_002`, `img_004`, `img_005`, `img_009`, `img_011`, `img_019`, `img_024`, `img_032`, `img_037`, `img_038` |
 
-**Trạng thái:** bản đề xuất tổng hợp — khóa sau khi cả 4 thành viên xác nhận tại họp Pha 2 và xử lý §4.3.
+**Trạng thái: đã chốt cho cả 40 ảnh** — không còn điểm mở (§4.3 đã đóng bằng kiểm tra ảnh gốc).
+Họp Pha 2 chỉ còn việc 4 thành viên xác nhận và khóa bản này; không cần tranh luận thêm ca nào.
 Sau khi khóa, mọi thay đổi làm đổi lớp/số box/biên/thuộc tính phải tạo phiên bản mới (v1.1) và ghi `kind`
 trong `submission/guideline_change.json` là `semantic`, không ghi là sửa chính tả.

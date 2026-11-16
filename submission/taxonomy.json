@@ -1,13 +1,13 @@
 {
-  "version": "v0",
+  "version": "v1.0",
   "ignore_class": "ignore_region",
   "classes": [
-    {"name": "car", "definition": "Ô tô con, SUV."},
-    {"name": "truck", "definition": "Xe tải, xe có thùng hàng riêng."},
-    {"name": "van", "definition": "Xe thùng kín cỡ nhỏ."},
-    {"name": "motorcycle", "definition": "Xe máy, mô tô."},
-    {"name": "person", "definition": "Người đi bộ hoặc người ngồi trên xe."},
-    {"name": "ignore_region", "definition": "Vùng bỏ qua (không phải vật): nơi không gán từng vật, bỏ sót ở đây không tính là lỗi."}
+    {"name": "car", "definition": "Ô tô con thân kín: sedan, hatchback, wagon, SUV/crossover, MPV, taxi; cabin và khoang khách liền một khối, không có thùng/sàn chở hàng riêng."},
+    {"name": "truck", "definition": "Xe có cabin và thùng/sàn chở hàng tách khỏi nhau: bán tải (kể cả gắn nắp/thùng dịch vụ), tải nhẹ, thùng kín/bạt, xe chở ô tô, đầu kéo + rơ-moóc."},
+    {"name": "van", "definition": "Xe thân hộp kín, nóc liền một đường từ cabin ra sau, không thùng hàng tách rời: minivan, minibus ≤ 16 chỗ, xe giao hàng liền thân."},
+    {"name": "motorcycle", "definition": "Xe 2 bánh gắn động cơ: xe máy, tay ga, mô tô, xe máy điện; mô tô + sidecar gắn liền tính là một đối tượng."},
+    {"name": "person", "definition": "Một người thật nhìn thấy trực tiếp: đi bộ, đứng, ngồi, làm việc, hoặc đang ngồi/điều khiển phương tiện. Không gồm tượng, ma-nơ-canh, hình in, đồ chơi, phản chiếu."},
+    {"name": "ignore_region", "definition": "Vùng bỏ qua (không phải vật): nơi vật quá nhỏ (< 20 px) hoặc chồng lấp không tách được, bỏ sót ở đây không tính là lỗi. Không dùng để che vật giả hoặc để né việc."}
   ],
   "attributes": [
     {"name": "occluded_level", "type": "select", "values": ["0", "1", "2", "3"], "default": "0"},
