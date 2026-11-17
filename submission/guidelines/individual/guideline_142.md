@@ -6,6 +6,7 @@
 - **Loại nhãn:** bounding box chữ nhật song song trục ảnh; dự kiến dùng CVAT, xuất COCO 1.0.
 - **Soạn thảo:** xem 40 ảnh và viết theo yêu cầu trực tiếp; chưa có người dùng/reviewer xác nhận các quyết định. Không có box hoặc pre-label được tạo ở Pha 1.
 - **Tên tệp:** giữ `guideline_v0.1.md` theo yêu cầu; không thực hiện phần nhóm hoặc gửi riêng.
+- Người viết / duyệt: Vũ Duy Khanh - 142
 
 ## 1. Mục tiêu
 
