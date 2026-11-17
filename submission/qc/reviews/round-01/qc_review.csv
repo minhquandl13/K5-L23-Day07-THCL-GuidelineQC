@@ -1,24 +1,20 @@
 image,object_id,error_type,reviewer,rule_id,region,note
-img_001.jpg,8,sai_thuoc_tinh,171,R-11,,"truncated=yes nhung box (230,199,159x439) khong cham mep"
+img_001.jpg,,khong,171,,,
 img_002.jpg,,khong,171,,,
-img_003.jpg,22,sai_thuoc_tinh,171,R-11,,"box cham mep anh (0,154,82x94) nhung truncated=no"
+img_003.jpg,22,sai_thuoc_tinh,171,R-11,,box cham mep trai (x=0) nhung truncated=no; nguoi bi cat boi khung hinh
 img_004.jpg,,khong,171,,,
-img_005.jpg,58,sai_thuoc_tinh,171,R-11,,"truncated=yes nhung box (27,221,469x416) khong cham mep"
-img_005.jpg,61,sai_thuoc_tinh,171,R-11,,"truncated=yes nhung box (547,147,367x490) khong cham mep"
-img_005.jpg,62,thua,171,R-08,,trung 0.56 voi cung lop id=61
-img_006.jpg,65,sai_lop,171,R-02,,"trung 0.67 voi motorcycle id=79, mot vat hai lop"
+img_005.jpg,62,sai_vi_tri_kich_thuoc,171,R-07,,"box trum ca nguoi ao xanh va nguoi phia sau, trung id61 (IoU 0.56); mot box mot vat"
+img_006.jpg,,khong,171,,,
 img_007.jpg,,khong,171,,,
-img_008.jpg,95,sai_thuoc_tinh,171,R-11,,"box cham mep anh (552,271,407x369) nhung truncated=no"
-img_008.jpg,97,sai_thuoc_tinh,171,R-11,,"box cham mep anh (0,233,203x177) nhung truncated=no"
-img_008.jpg,99,sai_thuoc_tinh,171,R-11,,"box cham mep anh (64,253,319x387) nhung truncated=no"
-img_008.jpg,108,sai_thuoc_tinh,171,R-11,,"box cham mep anh (935,242,25x51) nhung truncated=no"
-img_008.jpg,117,sai_thuoc_tinh,171,R-11,,"box cham mep anh (945,207,15x44) nhung truncated=no"
-img_008.jpg,102,thua,171,R-08,,trung 0.57 voi cung lop id=96
+img_008.jpg,95,sai_thuoc_tinh,171,R-11,,box cham mep phai + mep duoi nhung truncated=no
+img_008.jpg,97,sai_thuoc_tinh,171,R-11,,box cham mep trai (x=0) nhung truncated=no
+img_008.jpg,99,sai_thuoc_tinh,171,R-11,,box cham mep duoi nhung truncated=no
+img_008.jpg,108,sai_thuoc_tinh,171,R-11,,box cham mep phai (x+w=W) nhung truncated=no
+img_008.jpg,117,sai_thuoc_tinh,171,R-11,,box cham mep phai (x+w=W) nhung truncated=no
 img_009.jpg,,khong,171,,,
-img_010.jpg,147,thua,171,R-08,,trung 0.68 voi cung lop id=140
-img_010.jpg,145,sai_lop,171,R-02,,"trung 0.59 voi person id=147, mot vat hai lop"
+img_010.jpg,,khong,171,,,
 img_011.jpg,,khong,171,,,
-img_012.jpg,168,sai_thuoc_tinh,171,R-11,,"box cham mep anh (1,281,249x181) nhung truncated=no"
+img_012.jpg,168,sai_vi_tri_kich_thuoc,171,R-07,,box rong 710 px phu ca mat duong lan xe Mazda; box phai om sat mot vat
 img_013.jpg,,khong,171,,,
 img_014.jpg,,khong,171,,,
 img_015.jpg,,khong,171,,,
@@ -30,21 +26,20 @@ img_020.jpg,,khong,171,,,
 img_021.jpg,,khong,171,,,
 img_022.jpg,,khong,171,,,
 img_023.jpg,,khong,171,,,
-img_024.jpg,273,sai_thuoc_tinh,171,R-11,,"box cham mep anh (0,195,255x245) nhung truncated=no"
+img_024.jpg,273,sai_thuoc_tinh,171,R-11,,box cham mep trai (x=0) nhung truncated=no
 img_025.jpg,,khong,171,,,
 img_026.jpg,,khong,171,,,
 img_027.jpg,,khong,171,,,
 img_028.jpg,,khong,171,,,
 img_029.jpg,,khong,171,,,
-img_030.jpg,316,sai_thuoc_tinh,171,R-11,,"box cham mep anh (257,272,671x447) nhung truncated=no"
-img_030.jpg,316,thua,171,R-08,,trung 0.59 voi cung lop id=312
+img_030.jpg,316,sai_vi_tri_kich_thuoc,171,R-07,,"box bao hai xe may (Honda do + xe ben canh), trung id312 (IoU 0.59)"
 img_031.jpg,,khong,171,,,
-img_032.jpg,355,thua,171,R-08,,trung 0.75 voi cung lop id=354
+img_032.jpg,355,sai_vi_tri_kich_thuoc,171,R-07,,"box trum ba nguoi dung sat nhau, trung id354 (IoU 0.75)"
 img_033.jpg,,khong,171,,,
-img_034.jpg,387,sai_lop,171,R-02,,"trung 0.56 voi motorcycle id=388, mot vat hai lop"
-img_035.jpg,392,sai_thuoc_tinh,171,R-11,,"box cham mep anh (938,241,22x48) nhung truncated=no"
+img_034.jpg,,khong,171,,,
+img_035.jpg,392,sai_thuoc_tinh,171,R-11,,box cham mep phai nhung truncated=no
 img_036.jpg,,khong,171,,,
-img_037.jpg,409,sai_thuoc_tinh,171,R-11,,"box cham mep anh (0,218,240x200) nhung truncated=no"
+img_037.jpg,409,sai_thuoc_tinh,171,R-11,,"box cham mep trai (x=0), xe bi cat boi khung hinh nhung truncated=no"
 img_038.jpg,,khong,171,,,
-img_039.jpg,410,sai_lop,171,R-02,,"trung 0.61 voi motorcycle id=414, mot vat hai lop"
+img_039.jpg,,khong,171,,,
 img_040.jpg,,khong,171,,,

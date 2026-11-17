@@ -12,5 +12,5 @@
 - IAA trước calibration (kèm mẫu số): IoU TB 0.828 (234 cặp ghép / 80 lượt ảnh-người); đồng thuận lớp 94.9%; `occluded_level` 66.2%; `truncated` 96.6%; 169 + 39 box không ghép; 4 box `ignore_region` bỏ qua; kết luận CHƯA ĐẠT
 - Số ảnh phải calibration: 38 / 40 (471 ca, 6 nhóm lỗi, khai trong `submission/qc/calibration_decisions.csv`)
 - Vòng QC và số ảnh đã duyệt / cả lô: vòng 1 (full), đã duyệt 40/40 ảnh
-- Tỉ lệ lỗi: 35.0 % theo ảnh (14/40), 5.1 % theo đối tượng (22/429); 0 vật bỏ sót
-- **Quyết định** (Release / Hold / Rework) và lý do một dòng: Rework — 35.0% số ảnh có lỗi vượt ngưỡng lớp học 2%, và một loại lỗi (`sai_thuoc_tinh`, 14 ca) chiếm 61% tổng số lỗi nên không thể coi là nhiễu ngẫu nhiên; bản nhãn không bàn giao cho bước huấn luyện, cần sửa 22 đối tượng trong 14 ảnh của phiếu vòng 1.
+- Tỉ lệ lỗi: 22.5 % theo ảnh (9/40), 3.0 % theo đối tượng (13/429); 0 vật bỏ sót
+- **Quyết định** (Release / Hold / Rework) và lý do một dòng: Rework — 22.5% số ảnh có lỗi vượt ngưỡng lớp học 2%, và một loại lỗi (`sai_thuoc_tinh`, 9 ca) chiếm 69% tổng số lỗi nên là lỗi hệ thống của cách khai thuộc tính; cần sửa 13 đối tượng trong 9 ảnh của phiếu vòng 1.
