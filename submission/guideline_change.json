@@ -1,0 +1,29 @@
+{
+  "kind": "semantic",
+  "version_from": "v1.0",
+  "version_to": "v1.1",
+  "date": "2026-11-17",
+  "summary": "v1.1 doi hai cho hieu khac nhau lam IAA Pha 4 CHUA DAT (IoU 0.828 < 0.85; cung lop 94.9% < 95%; dong thuan occluded_level 66.2%): (1) them §2.2.1 — quy trinh do occluded_level, 6 moc neo (img_019, img_031, img_030, img_008, img_011, img_032), cam dung co occluded Q cua CVAT lam du lieu thuoc tinh, sat nguong ±5% lay muc thap hon; (2) R-08 thay bang phep thu 3 cau (≥50% than hoac ≥2 dau hieu, h ≥ 20 px, bien khong phu thuoc vat ben canh), nghi ngo giua gan va ignore thi gan ca the, mot vung ignore chi phu mot cum. Khong doi 6 lop, khong doi rules trong taxonomy.json.",
+  "affected_rules": [
+    "R-08",
+    "R-11"
+  ],
+  "evidence": {
+    "iaa_summary": "submission/qc/iaa_summary.md",
+    "iaa_iou": 0.828,
+    "iaa_class": 0.949,
+    "same_occluded_level": 0.662,
+    "cases": {
+      "bat_dong_ignore": 123,
+      "bo_sot_thua": 123,
+      "iou_thap": 111,
+      "sai_thuoc_tinh": 81,
+      "co_can_review": 21,
+      "sai_lop": 12
+    }
+  },
+  "scope": "lo",
+  "scope_note": "Ca bat dong ignore va sai thuoc tinh la thay doi cach hieu chung cho ca lo 40 anh, nen pham vi la lo; cac ca iou_thap, sai_lop, co_can_review chi sua o anh tuong ung (pham vi anh).",
+  "approved_by": "171 (nguoi dieu phoi)",
+  "reviewed_by": "142"
+}
